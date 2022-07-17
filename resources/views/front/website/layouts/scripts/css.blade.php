@@ -32,6 +32,7 @@
 <link rel="stylesheet" id="color" href="{{ asset('front/website/css/colors/light-black.css') }}">
 
 <link href="{{asset('front/website/css')}}/droidarabickufi.css" rel="stylesheet" type="text/css" />
+<link href="{{ asset('front/website/bootstrap-sweetalert') }}/sweetalert.css" rel="stylesheet">
 
 
 @if($lang == 'ar')
