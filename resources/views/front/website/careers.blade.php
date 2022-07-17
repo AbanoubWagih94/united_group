@@ -1,11 +1,25 @@
 @php
 
 $lang = app()->getLocale();
+$dir = 'left';
+$dir2 = 'right';
+$prefix = '';
+
+if ($lang == 'en') {
+    $dir = 'left';
+    $dir2 = 'right';
+    $prefix = '/';
+} else {
+    $dir = 'right';
+    $dir2 = 'left';
+    $prefix = 'ar/';
+}
 
 $setting = App\Models\E_Tower\Setting::first();
 
 $pageDetail = App\Models\E_Tower\PageDetail::first();
 
+$contactUs = App\Models\Website\ContactUs::first();
 @endphp
 
 @extends('front.website.layouts.master')
@@ -46,11 +60,12 @@ inner-pages hd-white
 <section class="headings">
     <div class="text-heading text-center">
         <div class="container">
-            <h1>Careers</h1>
-            <h2><a href="index.html">Home </a> &nbsp;/&nbsp; Careers</h2>
+            <h1>{{ trans('home.careers') }}</h1>
+            <h2><a href="{{url($prefix)}}">{{ trans('home.home') }} </a> &nbsp;/&nbsp; {{ trans('home.careers') }}</h2>
         </div>
     </div>
 </section>
+
 <!-- END SECTION HEADINGS -->
 
 <!-- START SECTION CONTACT US -->
@@ -58,69 +73,129 @@ inner-pages hd-white
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12">
-                <h2 class="mb-4">Contact</h2><hr>
-                <h3><a href="index.html">Home </a> &nbsp;/&nbsp; Careers</h3><hr><br>
-                <form id="contactform" class="contact-form" name="contactform" method="post" novalidate>
+                <h2 class="mb-4">{{ trans('contact_us.contact') }}</h2><hr>
+                <h3><a href="{{url($prefix)}}">{{ trans('home.home') }} </a> &nbsp;/&nbsp; {{ trans('home.careers') }}</h3><hr><br>
+                <form id="careerform" class="contact-form" action="{{url($prefix.'career-request')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div id="success" class="successform">
-                        <p class="alert alert-success font-weight-bold" role="alert">Your message was sent successfully!</p>
+                        <p class="alert alert-success font-weight-bold" role="alert">{{trans('contact_us.success_message')}}</p>
                     </div>
-                    <h5 class="mt-3">Send Message</h5>
+                    <h5 class="mt-3">{{ trans('contact_us.send_message') }}</h5>
                     <hr>
                     <div id="error" class="errorform">
-                        <p>Something went wrong, try refreshing and submitting the form again.</p>
+                        <p>{{trans('contact_us.error_message')}}</p>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <input type="text" required class="form-control input-custom input-full" name="name" placeholder="Full Name">
+                            <label>{{ trans('contact_us.full_name') }}</label>
+                            <input type="text" required class="form-control input-custom input-full" value="{{old('name')}}" name="name" placeholder="{{trans('contact_us.full_name')}}">
+                            @if ($errors->has('name'))
+                                <span class="help-block" style="color:red">
+                                    <strong>{{ $errors->first('name') }} </strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="form-group col-md-6">
-                            <input type="text" class="form-control input-custom input-full" name="email" placeholder="Email">
+                            <label>{{ trans('contact_us.email') }}</label>
+                            <input type="email" class="form-control input-custom input-full" value="{{old('email')}}" name="email" placeholder="{{trans('contact_us.email')}}">
+                            @if ($errors->has('email'))
+                                <span class="help-block" style="color:red">
+                                    <strong>{{ $errors->first('email') }} </strong>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" required class="form-control input-custom input-full" name="name" placeholder="Subject">
+                        <label>{{ trans('contact_us.phone') }}</label>
+                        <input type="text" class="form-control input-custom input-full" name="phone" value="{{old('phone')}}"
+                            placeholder="{{trans('contact_us.phone')}}" required>
+                            @if ($errors->has('phone'))
+                            <span class="help-block" style="color:red">
+                                <strong>{{ $errors->first('phone') }} </strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>{{ trans('contact_us.current_salary') }}</label>
+                            <input type="number" required class="form-control input-custom input-full" value="{{old('current_salary')}}" name="current_salary" placeholder="{{trans('contact_us.current_salary')}}">
+                            @if ($errors->has('current_salary'))
+                                <span class="help-block" style="color:red">
+                                    <strong>{{ $errors->first('current_salary') }} </strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>{{ trans('contact_us.expected_salary') }}</label>
+                            <input type="number" required class="form-control input-custom input-full" value="{{old('expected_salary')}}" name="expected_salary" placeholder="{{trans('contact_us.expected_salary')}}">
+                            @if ($errors->has('expected_salary'))
+                            <span class="help-block" style="color:red">
+                                <strong>{{ $errors->first('expected_salary') }} </strong>
+                            </span>
+                        @endif
+                        </div>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control textarea-custom input-full" id="ccomment" name="message" required rows="8" placeholder="Message"></textarea>
+                        <label>{{ trans('contact_us.graduation_year') }}</label>
+                        <input type="date" required class="form-control input-custom input-full" value="{{old('graduation_year')}}" name="graduation_year" placeholder="{{trans('contact_us.graduation_year')}}" >
+                        @if ($errors->has('message'))
+                        <span class="help-block" style="color:red">
+                            <strong>{{ $errors->first('message') }} </strong>
+                        </span>
+                    @endif
                     </div>
                     <div class="form-group">
-                        <h4>Upload your CV : </h4>
-                        <input type="file" class="" name="file">
+                        <label>{{ trans('contact_us.message') }}</label>
+                        <textarea class="form-control textarea-custom input-full" id="ccomment" name="message" required rows="8" placeholder="{{trans('contact_us.message')}}">{{old('message')}}</textarea>
+                        @if ($errors->has('message'))
+                        <span class="help-block" style="color:red">
+                            <strong>{{ $errors->first('message') }} </strong>
+                        </span>
+                    @endif
                     </div>
-                    <button type="submit" id="submit-contact" class="btn btn-primary btn-lg">Submit</button>
+                    <div class="form-group">
+                        <h4>{{ trans('contact_us.upload_cv') }} : </h4>
+                        <input type="file" class="" name="file" required>
+                        @if ($errors->has('file'))
+                        <span class="help-block" style="color:red">
+                            <strong>{{ $errors->first('file') }} </strong>
+                        </span>
+                    @endif
+                    </div>
+                    <button type="submit" id="careerform" class="btn btn-primary btn-lg">{{trans('contact_us.submit')}}</button>
                 </form>
             </div>
             <div class="col-lg-4 col-md-12 bgc">
                 <div class="call-info">
-                    <h3>Get in Touch</h3>
-                    <p class="mb-5">Please find below contact details and contact us today!</p>
+                    <h3>{{trans('contact_us.contact_details')}}</h3>
+                        <p class="mb-5">{{ trans('contact_us.details_message') }}</p>
                     <ul>
                         <li>
-                            <p>Office Address :</p>
+                            <p>{{ trans('contact_us.address') }} :</p>
                             <div class="info">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <p class="in-p">95 South Park Ave, USA</p>
+                                <p class="in-p">{{ $contactUs->address }}</p>
                             </div>
                         </li>
                         <li>
-                            <p>Contact Number :</p>
+                            <p>{{ trans('contact_us.number') }} :</p>
                             <div class="info">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
-                                <p class="in-p">+456 875 369 208</p>
+                                <p class="in-p">{{ $contactUs->mobile }}</p>
                             </div>
                         </li>
                         <li>
-                            <p>Email Address :</p>
+                            <p>{{ trans('contact_us.email') }} :</p>
                             <div class="info">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <p class="in-p ti">support@findhouses.com</p>
+                                <p class="in-p ti">{{ $contactUs->email }}</p>
                             </div>
                         </li>
                         <li>
-                            <p>Career Info :</p>
+                            <p>{{ trans('contact_us.bussiness_hours') }} :</p>
                             <div class="info cll">
                                 <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                <p class="in-p ti">8:00 a.m - 9:00 p.m</p>
+                                <p class="in-p ti">{{ $contactUs->office_hours }}</p>
                             </div>
                         </li>
                     </ul>

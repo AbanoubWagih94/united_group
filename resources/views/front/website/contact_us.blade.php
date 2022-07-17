@@ -2,6 +2,20 @@
 
 $lang = app()->getLocale();
 
+$dir = 'left';
+$dir2 = 'right';
+$prefix = '';
+
+if ($lang == 'en') {
+    $dir = 'left';
+    $dir2 = 'right';
+    $prefix = '/';
+} else {
+    $dir = 'right';
+    $dir2 = 'left';
+    $prefix = 'ar/';
+}
+
 $setting = App\Models\E_Tower\Setting::first();
 
 $pageDetail = App\Models\E_Tower\PageDetail::first();
@@ -46,8 +60,8 @@ inner-pages hd-white
 <section class="headings">
     <div class="text-heading text-center">
         <div class="container">
-            <h1>Contact Us</h1>
-            <h2><a href="index.html">Home </a> &nbsp;/&nbsp; Contact Us</h2>
+            <h1>{{ trans('home.contact_us') }}</h1>
+            <h2><a href="{{url($prefix)}}">{{ trans('home.home') }} </a> &nbsp;/&nbsp; {{ trans('home.contact_us') }}</h2>
         </div>
     </div>
 </section>
@@ -55,7 +69,7 @@ inner-pages hd-white
 
 <section class="bg-white-3">
     <div class="container">
-       <h3 class="mt-3 mb-3">OUR LOCATION</h3>
+       <h3 class="mt-3 mb-3">{{ trans('contact_us.our_location') }}</h3>
        <div class="property-location">
           <div class="divider-fade"></div>
           @php
@@ -72,56 +86,90 @@ inner-pages hd-white
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12">
-                <h3 class="mb-4">Contact Us</h3>
-                <form id="contactform" class="contact-form" name="contactform" method="post" novalidate>
+                <h3 class="mb-4">{{ trans('home.contact_us') }}</h3>
+                <form  id="contact-form" method="post" action="{{url($prefix.'contact-us-request')}}">
+                    @csrf
                     <div id="success" class="successform">
-                        <p class="alert alert-success font-weight-bold" role="alert">Your message was sent successfully!</p>
+                        <p class="alert alert-success font-weight-bold" role="alert">{{trans('contact_us.success_message')}}</p>
                     </div>
                     <div id="error" class="errorform">
-                        <p>Something went wrong, try refreshing and submitting the form again.</p>
+                        <p>{{trans('contact_us.error_message')}}</p>
                     </div>
                     <div class="form-group">
-                        <input type="text" required class="form-control input-custom input-full" name="name" placeholder="First Name">
+                        <input type="text" required class="form-control input-custom input-full" name="name"
+                            placeholder="{{trans('contact_us.first_name')}}" required>
+                            @if ($errors->has('name'))
+                            <span class="help-block" style="color:red">
+                                <strong>{{ $errors->first('name') }} </strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group">
-                        <input type="text" required class="form-control input-custom input-full" name="lastname" placeholder="Last Name">
+                        <input type="text" required class="form-control input-custom input-full" name="lastname"
+                            placeholder="{{trans('contact_us.last_name')}}" required>
+                            @if ($errors->has('last_name'))
+                            <span class="help-block" style="color:red">
+                                <strong>{{ $errors->first('last_name') }} </strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control input-custom input-full" name="email" placeholder="Email">
+                        <input type="email" class="form-control input-custom input-full" name="email"
+                            placeholder="{{trans('contact_us.email')}}" required>
+                            @if ($errors->has('email'))
+                            <span class="help-block" style="color:red">
+                                <strong>{{ $errors->first('email') }} </strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control textarea-custom input-full" id="ccomment" name="message" required rows="8" placeholder="Message"></textarea>
+                        <input type="text" class="form-control input-custom input-full" name="phone"
+                            placeholder="{{trans('contact_us.phone')}}" required>
+                            @if ($errors->has('phone'))
+                            <span class="help-block" style="color:red">
+                                <strong>{{ $errors->first('phone') }} </strong>
+                            </span>
+                        @endif
                     </div>
-                    <button type="submit" id="submit-contact" class="btn btn-primary btn-lg">Submit</button>
+                    <div class="form-group">
+                        <textarea class="form-control textarea-custom input-full" id="ccomment" name="message" required rows="8"
+                            placeholder="{{trans('contact_us.message')}}" required></textarea>
+                            @if ($errors->has('message'))
+                            <span class="help-block" style="color:red">
+                                <strong>{{ $errors->first('message') }} </strong>
+                            </span>
+                        @endif
+                    </div>
+                    <button type="submit" id="contact-form" class="btn btn-primary btn-lg">{{trans('contact_us.submit')}}</button>
                 </form>
             </div>
             <div class="col-lg-4 col-md-12 bgc">
                 <div class="call-info">
-                    <h3>Contact Details</h3>
-                    <p class="mb-5">Please find below contact details and contact us today!</p>
+                    <h3>{{trans('contact_us.contact_details')}}</h3>
+                    <p class="mb-5">{{ trans('contact_us.details_message') }}</p>
                     <ul>
                         <li>
                             <div class="info">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <p class="in-p">95 South Park Ave, USA</p>
+                                <p class="in-p">{{ $contactUs->address }}</p>
                             </div>
                         </li>
                         <li>
                             <div class="info">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
-                                <p class="in-p">+456 875 369 208</p>
+                                <p class="in-p">{{ $contactUs->mobile }}</p>
                             </div>
                         </li>
                         <li>
                             <div class="info">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <p class="in-p ti">support@findhouses.com</p>
+                                <p class="in-p ti">{{ $contactUs->email }}</p>
                             </div>
                         </li>
                         <li>
                             <div class="info cll">
                                 <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                <p class="in-p ti">8:00 a.m - 9:00 p.m</p>
+                                <p class="in-p ti">{{ $contactUs->office_hours }}</p>
                             </div>
                         </li>
                     </ul>

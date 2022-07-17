@@ -1,0 +1,41 @@
+<?php
+
+
+return [
+    'contact'=> 'اتصال',
+    'contact_details'=> 'تفاصيل الاتصال',
+    'details_message'=> 'يرجى الاطلاع أدناه على تفاصيل الاتصال والاتصال بنا اليوم!',
+    'first_name'=> 'الاسم الاول',
+    'last_name'=> 'الاسم الاخير',
+    'email'=> 'البريد الإلكترونى',
+    'phone'=> 'رقم الهاتف',
+    'message'=> 'الرسالة',
+    'submit'=> 'إرسال',
+    'success_message' => 'لقد تم ارسال رسالتك بنجاح!',
+    'error_message' => 'حدث خطأ ما ، حاول تحديث النموذج وإرساله مرة أخرى.',
+    'our_location' => 'موقعنا',
+    'send_message'=> 'أرسل رسالة',
+    'full_name'=> 'الاسم كامل',
+    'subject'=> 'الموضوع',
+    'upload_cv'=> 'قم برفع السيرة الذاتية',
+    'current_salary'=> 'الراتب الحالى',
+    'expected_salary'=> 'الراتب المتوقع',
+    'graduation_year'=> 'سنة التخرج',
+    'address' => 'عنوان المكتب',
+    'number' => 'رقم الاتصال',
+    'bussiness_hours' => 'ساعات العمل',
+    
+    //Error messages 
+    'first_name_required'=> 'الاسم الاول مطلوب',
+    'full_name_required'=> 'الاسم الكامل مطلوب',
+    'last_name_required'=> 'الاسم الاخير مطلوب',
+    'email_required'=> 'البريد الالكترونى مطلوب',
+    'email_email'=> 'البريد الالكترونى غير صحيح',
+    'message_required'=> 'الرسالة مطلوبة',
+    'phone_required'=> 'رقم التليفون مطلوب',
+    'file_required'=> 'السيرة الذاتية مطلوبة',
+    'graduation_year_required'=> 'سنة التخرج مطلوبة',
+    'expected_salary_required'=> 'الراتب المتوفع مطلوب',
+    'current_salary_required'=> 'الراتب الحالى مطلوب',
+    'file_type'=> 'السيرة الذاتية يجب ان تكون من النوع pdf او word',
+];

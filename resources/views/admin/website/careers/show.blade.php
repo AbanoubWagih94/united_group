@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-lg-6 mb-50">
                             <label class="text-bold-600"> CV File </label><br>
-                            <a href="{{ asset('uploads/' . $career->cv) }}" class="btn btn-primary" target="_blank">View CV</a>
+                            <a href="{{ asset('uploads/cvs/' . $career->cv) }}" class="btn btn-primary" target="_blank">View CV</a>
                         </div>
                     </div>
                 </div>

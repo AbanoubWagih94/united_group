@@ -84,7 +84,7 @@
                     email: {
                         required: true,
                         email: true
-                    }
+                    },
 
                 },
                 messages: {
