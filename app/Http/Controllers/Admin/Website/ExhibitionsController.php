@@ -16,8 +16,8 @@ class ExhibitionsController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'title_en' => 'required',
-            'title_ar' => 'required',
+            'title_en' => 'required|unique:exhibitions',
+            'title_ar' => 'required|unique:exhibitions',
             'description_en' => 'required',
             'description_ar' => 'required',
             'image' => 'required|mimes:jpg,png,jpeg,svg',
@@ -66,8 +66,8 @@ class ExhibitionsController extends Controller
         $exhibition = Exhibition::findorFail($id);
 
         $this->validate($request, [
-            'title_en' => 'required',
-            'title_ar' => 'required',
+            'title_en' => 'required|unique:exhibitions,title_en,'.$id,
+            'title_ar' => 'required|unique:exhibitions,title_ar,'.$id,
             'description_en' => 'required',
             'description_ar' => 'required',
             'image' => 'nullable|mimes:jpg,png,jpeg,svg',

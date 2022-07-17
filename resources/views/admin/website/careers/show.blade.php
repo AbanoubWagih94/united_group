@@ -37,8 +37,8 @@
                         </div>
                         <div class="col-lg-6 mb-50">
                             <label class="text-bold-600"> Graduation Year</label>
-                            <input type="number" name="graduation_year" class="form-control m-input"
-                                value="{{ $career->graduation_year }}" placeholder="Graduation Year" readonly>
+                            <input type="text" name="graduation_year" class="form-control m-input"
+                                value="{{ $career->graduation_year }}" placeholder="{{ $career->graduation_year }}" readonly>
                         </div>
                         <div class="col-lg-6 mb-50">
                             <label class="text-bold-600"> Current Salary</label>

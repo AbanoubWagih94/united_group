@@ -197,7 +197,7 @@ inner-pages sin-1 homepage-1 hd-white
                        <iframe src="{{$project->location}}" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <!-- Star Add Review -->
-                    <section class="single reviews leve-comments details">
+                    {{-- <section class="single reviews leve-comments details">
                         <div id="add-review" class="add-review-box">
                             <!-- Add Review -->
                             <h3 class="listing-desc-headline margin-bottom-20 mb-4">{{ trans('project.add_review') }}</h3>
@@ -257,7 +257,7 @@ inner-pages sin-1 homepage-1 hd-white
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> --}}
                     <!-- End Add Review -->
                 </div>
             </div>

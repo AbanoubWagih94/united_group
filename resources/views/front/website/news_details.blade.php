@@ -98,7 +98,7 @@ $pageDetail = App\Models\E_Tower\PageDetail::first();
                             </div>
                         </div>
                     </div>
-                    <section class="leve-comments wpb">
+                    {{-- <section class="leve-comments wpb">
                         <h3 class="mb-5">{{ trans('news.comment') }}</h3>
                         <div class="row">
                             <div class="col-md-12 data">
@@ -129,7 +129,7 @@ $pageDetail = App\Models\E_Tower\PageDetail::first();
                                 </form>
                             </div>
                         </div>
-                    </section>
+                    </section> --}}
                 </div>
               @if (count($news)>0)
               <aside class="col-lg-3 col-md-12">
