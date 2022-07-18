@@ -16,8 +16,8 @@ class EventsController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'title_en' => 'required',
-            'title_ar' => 'required',
+            'title_en' => 'required|unique:events',
+            'title_ar' => 'required|unique:events',
             'description_en' => 'required',
             'description_ar' => 'required',
             'image' => 'required|mimes:jpg,png,jpeg,svg',
@@ -66,8 +66,8 @@ class EventsController extends Controller
         $event = Event::findorFail($id);
 
         $this->validate($request, [
-            'title_en' => 'required',
-            'title_ar' => 'required',
+            'title_en' => 'required|unique:events,title_en,'.$id,
+            'title_ar' => 'required|unique:events,title_ar,'.$id,
             'description_en' => 'required',
             'description_ar' => 'required',
             'image' => 'nullable|mimes:jpg,png,jpeg,svg',

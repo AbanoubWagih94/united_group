@@ -15,8 +15,8 @@ class NewsController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'title_en' => 'required',
-            'title_ar' => 'required',
+            'title_en' => 'required|unique:news',
+            'title_ar' => 'required|unique:news',
             'description_en' => 'required',
             'description_ar' => 'required',
             'image' => 'required|mimes:jpg,png,jpeg,svg',
@@ -52,8 +52,8 @@ class NewsController extends Controller
         $news = News::findorFail($id);
 
         $this->validate($request, [
-            'title_en' => 'required',
-            'title_ar' => 'required',
+            'title_en' => 'required|unique:news,title_en,'.$id,
+            'title_ar' => 'required|unique:news,title_ar,'.$id,
             'description_en' => 'required',
             'description_ar' => 'required',
             'image' => 'nullable|mimes:jpg,png,jpeg,svg',

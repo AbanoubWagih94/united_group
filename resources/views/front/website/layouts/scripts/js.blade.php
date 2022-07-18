@@ -49,6 +49,7 @@
 <script src="{{ asset('front/website/revolution/js/extensions/revolution.extension.parallax.min.js') }}"></script>
 <script src="{{ asset('front/website/revolution/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
 <script src="{{ asset('front/website/revolution/js/extensions/revolution.extension.video.min.js') }}"></script>
+<script src="{{ asset('front/website/bootstrap-sweetalert') }}/sweetalert.min.js"></script>
 
 <script>
     var tpj = jQuery;
@@ -150,6 +151,29 @@
 </script>
 
 <script>
+
+@if ($message = Session::get('success'))
+            
+            swal({
+            title: "",
+            text: "{{ $message }}",
+            imageUrl: '{{ asset('front/website/img/sent.jpg') }}'
+            });
+        
+        @endif
+
+
+        @if ($message = Session::get('error'))
+        
+            swal({
+            title: "",
+            text: "{{ $message }}",
+            type: "warning",
+            showConfirmButton: true,
+            confirmButtonClass: "btn-danger",
+            });
+        
+        @endif
     $('.home5-right-slider').owlCarousel({
         loop: true,
         margin: 30,

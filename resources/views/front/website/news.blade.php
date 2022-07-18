@@ -29,347 +29,139 @@ $pageDetail = App\Models\E_Tower\PageDetail::first();
 @endsection
 
 @section('body_class')
-inner-pages hd-white
+    inner-pages hd-white
 @endsection
 
 @push('custom-css-scripts')
-   <style>
-      .float {
-         position: fixed !important;
-         width: 75px;
-         height: 75px;
-         bottom: 20px;
-         right: 40px;
-         color: #000;
-         border-radius: 50px;
-         text-align: center;
-         font-size: 30px;
-         z-index: 100;
-         background-color: #075E54;
-      }
+    <style>
+        .float {
+            position: fixed !important;
+            width: 75px;
+            height: 75px;
+            bottom: 20px;
+            right: 40px;
+            color: #000;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            z-index: 100;
+            background-color: #075E54;
+        }
 
-      .my-float {
-         margin-top: 16px;
-         margin-left: 2px;
-      }
-   </style>
+        .my-float {
+            margin-top: 16px;
+            margin-left: 2px;
+        }
+    </style>
 @endpush
 
 @section('content')
+    <section class="headings">
+        <div class="text-heading text-center">
+            <div class="container">
+                <h1>{{ trans('home.news') }}</h1>
+                <h2><a href="{{ url($prefix) }}">{{ trans('home.home') }} </a> &nbsp;/&nbsp; {{ trans('home.news') }}
+                </h2>
+            </div>
+        </div>
+    </section>
+    <!-- END SECTION HEADINGS -->
 
-<section class="headings">
-    <div class="text-heading text-center">
+    <!-- START SECTION BLOG -->
+    <section class="blog-section bg-white-1">
         <div class="container">
-            <h1>News</h1>
-            <h2><a href="index.html">Home </a> &nbsp;/&nbsp; News</h2>
-        </div>
-    </div>
-</section>
-<!-- END SECTION HEADINGS -->
+            <div class="news-wrap">
 
-<!-- START SECTION BLOG -->
-<section class="blog-section bg-white-1">
-    <div class="container">
-        <div class="news-wrap">
-            <div class="row">
-                <div class="col-lg-4 col-md-12 col-xs-12">
-                    <div class="news-item">
-                        <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-img-link">
-                            <div class="news-item-img">
-                                <img class="img-responsive" src="{{ asset('front/website/img/b-10.jpg') }}" alt="blog image">
-                            </div>
-                        </a>
-                        <div class="news-item-text">
-                            <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}"><h3>Real Estate News</h3></a>
-                            <div class="dates">
-                                <span class="date">April 11, 2020 &nbsp;/</span>
-                                <ul class="action-list pl-0">
+                <div class="row space port">
+                    @foreach ($news as $new)
+                        <div class="col-lg-4 col-md-12 col-xs-12">
+                            <div class="news-item">
+                                <a href="{{ url($prefix . ($lang == 'en' ? 'news/' : 'الاخبار/') . $new->{'slug_' . $lang}) }}"
+                                    class="news-img-link">
+                                    <div class="news-item-img">
+                                        <img class="img-responsive" src="{{ asset('uploads/' . $new->image) }}"
+                                            alt="blog image">
+                                    </div>
+                                </a>
+                                <div class="news-item-text">
+                                    <a
+                                        href="{{ url($prefix . ($lang == 'en' ? 'news/' : 'الاخبار/') . $new->{'slug_' . $lang}) }}">
+                                        <h3>{{ $new->{'title_' . $lang} }}</h3>
+                                    </a>
+                                    <div class="dates">
+                                        <span
+                                            class="date">{{ Carbon\Carbon::parse($new->creadted_at)->format('M d Y') }}</span>
+                                        {{-- <ul class="action-list pl-0">
                                     <li class="action-item pl-2"><i class="fa fa-heart"></i> <span>306</span></li>
                                     <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
                                     <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                                </ul>
-                            </div>
-                            <div class="news-item-descr big-news">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="news-item-bottom">
-                                <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-link">Read more...</a>
-                                <div class="admin">
-                                    <p>By, Lisa Jhonson</p>
-                                    <img src="{{ asset('front/website/img/b-10.jpg') }}" alt="">
+                                </ul> --}}
+                                    </div>
+                                    <div class="news-item-descr big-news">
+                                        <p class="three_lines">{{ $new->{'description_' . $lang} }}</p>
+                                    </div>
+                                    <div class="news-item-bottom">
+                                        <a href="{{ url($prefix . ($lang == 'en' ? 'news/' : 'الاخبار/') . $new->{'slug_' . $lang}) }}"
+                                            class="news-link">{{ trans('home.read_more') }}...</a>
+                                        <!--<div class="admin">
+                                            <p>By, Karl Smith</p>
+                                            <img src="images/testimonials/ts-6.jpg" alt="">
+                                        </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
+
                 </div>
-                <div class="col-lg-4 col-md-12 col-xs-12">
-                    <div class="news-item">
-                        <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-img-link">
-                            <div class="news-item-img">
-                                <img class="img-responsive" src="{{ asset('front/website/img/b-11.jpg') }}" alt="blog image">
-                            </div>
-                        </a>
-                        <div class="news-item-text">
-                            <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}"><h3>Real Estate News</h3></a>
-                            <div class="dates">
-                                <span class="date">April 11, 2020 &nbsp;/</span>
-                                <ul class="action-list pl-0">
-                                    <li class="action-item pl-2"><i class="fa fa-heart"></i> <span>306</span></li>
-                                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                                </ul>
-                            </div>
-                            <div class="news-item-descr big-news">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="news-item-bottom">
-                                <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-link">Read more...</a>
-                                <div class="admin">
-                                    <p>By, Karl Smith</p>
-                                    <img src="{{ asset('front/website/img/b-11.jpg') }}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-xs-12">
-                    <div class="news-item">
-                        <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-img-link">
-                            <div class="news-item-img">
-                                <img class="img-responsive" src="{{ asset('front/website/img/b-12.jpg') }}" alt="blog image">
-                            </div>
-                        </a>
-                        <div class="news-item-text">
-                            <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}"><h3>Real Estate News</h3></a>
-                            <div class="dates">
-                                <span class="date">April 11, 2020 &nbsp;/</span>
-                                <ul class="action-list pl-0">
-                                    <li class="action-item pl-2"><i class="fa fa-heart"></i> <span>306</span></li>
-                                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                                </ul>
-                            </div>
-                            <div class="news-item-descr big-news">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="news-item-bottom">
-                                <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-link">Read more...</a>
-                                <div class="admin">
-                                    <p>By, katy Teddy</p>
-                                    <img src="{{ asset('front/website/img/b-12.jpg') }}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
-            <div class="row space port">
-                <div class="col-lg-4 col-md-12 col-xs-12">
-                    <div class="news-item">
-                        <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-img-link">
-                            <div class="news-item-img">
-                                <img class="img-responsive" src="{{ asset('front/website/img/b-10.jpg') }}" alt="blog image">
-                            </div>
+            <nav aria-label="..." class="pt-5">
+                <ul class="pagination">
+                    @if ($news->currentPage() != 1)
+                        <li class="page-item prev">
+                            <a class="page-link" href="{{ $news->previousPageUrl() }}">
+                                {{ trans('home.prev') }}
+                            </a>
+                        </li>
+                    @else
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">{{ trans('home.prev') }}</a>
+                        </li>
+                    @endif
+
+                    @for ($i = 1; $i <= $news->lastPage(); $i++)
+                        @if ($i == $news->currentPage())
+                            <li class="page-item active"><a class="page-link">{{ $i }} <span
+                                        class="sr-only">(current)</span></a></li>
+                        @else
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $news->url($i) }}">
+                                    {{ $i }}&nbsp;
+                                </a>
+                            </li>
+                        @endif
+                    @endfor
+
+                    <li class="page-item next">
+                        @if ($news->currentPage() != $news->lastPage())
+                            <a class="page-link" href="{{ $news->nextPageUrl() }}">
+                                {{ trans('home.next') }}
+                            </a>
+                    </li>
+                @else
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">
+                            {{ trans('home.next') }}
                         </a>
-                        <div class="news-item-text">
-                            <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}"><h3>Real Estate News</h3></a>
-                            <div class="dates">
-                                <span class="date">April 11, 2020 &nbsp;/</span>
-                                <ul class="action-list pl-0">
-                                    <li class="action-item pl-2"><i class="fa fa-heart"></i> <span>306</span></li>
-                                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                                </ul>
-                            </div>
-                            <div class="news-item-descr big-news">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="news-item-bottom">
-                                <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-link">Read more...</a>
-                                <div class="admin">
-                                    <p>By, Karl Smith</p>
-                                    <img src="{{ asset('front/website/img/b-10.jpg') }}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-xs-12">
-                    <div class="news-item">
-                        <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-img-link">
-                            <div class="news-item-img">
-                                <img class="img-responsive" src="{{ asset('front/website/img/b-11.jpg') }}" alt="blog image">
-                            </div>
-                        </a>
-                        <div class="news-item-text">
-                            <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}"><h3>Real Estate News</h3></a>
-                            <div class="dates">
-                                <span class="date">April 11, 2020 &nbsp;/</span>
-                                <ul class="action-list pl-0">
-                                    <li class="action-item pl-2"><i class="fa fa-heart"></i> <span>306</span></li>
-                                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                                </ul>
-                            </div>
-                            <div class="news-item-descr big-news">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="news-item-bottom">
-                                <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-link">Read more...</a>
-                                <div class="admin">
-                                    <p>By, Karl Smith</p>
-                                    <img src="{{ asset('front/website/img/b-11.jpg') }}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-xs-12">
-                    <div class="news-item">
-                        <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-img-link">
-                            <div class="news-item-img">
-                                <img class="img-responsive" src="{{ asset('front/website/img/b-12.jpg') }}" alt="blog image">
-                            </div>
-                        </a>
-                        <div class="news-item-text">
-                            <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}"><h3>Real Estate News</h3></a>
-                            <div class="dates">
-                                <span class="date">April 11, 2020 &nbsp;/</span>
-                                <ul class="action-list pl-0">
-                                    <li class="action-item pl-2"><i class="fa fa-heart"></i> <span>306</span></li>
-                                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                                </ul>
-                            </div>
-                            <div class="news-item-descr big-news">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="news-item-bottom">
-                                <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-link">Read more...</a>
-                                <div class="admin">
-                                    <p>By, Karl Smith</p>
-                                    <img src="{{ asset('front/website/img/b-12.jpg') }}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-12 col-xs-12">
-                    <div class="news-item">
-                        <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-img-link">
-                            <div class="news-item-img">
-                                <img class="img-responsive" src="{{ asset('front/website/img/b-10.jpg') }}" alt="blog image">
-                            </div>
-                        </a>
-                        <div class="news-item-text">
-                            <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}"><h3>Real Estate News</h3></a>
-                            <div class="dates">
-                                <span class="date">April 11, 2020 &nbsp;/</span>
-                                <ul class="action-list pl-0">
-                                    <li class="action-item pl-2"><i class="fa fa-heart"></i> <span>306</span></li>
-                                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                                </ul>
-                            </div>
-                            <div class="news-item-descr big-news">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="news-item-bottom">
-                                <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-link">Read more...</a>
-                                <div class="admin">
-                                    <p>By, Karl Smith</p>
-                                    <img src="{{ asset('front/website/img/b-10.jpg') }}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-xs-12">
-                    <div class="news-item">
-                        <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-img-link">
-                            <div class="news-item-img">
-                                <img class="img-responsive" src="{{ asset('front/website/img/b-11.jpg') }}" alt="blog image">
-                            </div>
-                        </a>
-                        <div class="news-item-text">
-                            <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}"><h3>Real Estate News</h3></a>
-                            <div class="dates">
-                                <span class="date">April 11, 2020 &nbsp;/</span>
-                                <ul class="action-list pl-0">
-                                    <li class="action-item pl-2"><i class="fa fa-heart"></i> <span>306</span></li>
-                                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                                </ul>
-                            </div>
-                            <div class="news-item-descr big-news">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="news-item-bottom">
-                                <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-link">Read more...</a>
-                                <div class="admin">
-                                    <p>By, Karl Smith</p>
-                                    <img src="{{ asset('front/website/img/b-11.jpg') }}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 col-xs-12 no-mb">
-                    <div class="news-item">
-                        <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-img-link">
-                            <div class="news-item-img">
-                                <img class="img-responsive" src="{{ asset('front/website/img/b-12.jpg') }}" alt="blog image">
-                            </div>
-                        </a>
-                        <div class="news-item-text">
-                            <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}"><h3>Real Estate News</h3></a>
-                            <div class="dates">
-                                <span class="date">April 11, 2020 &nbsp;/</span>
-                                <ul class="action-list pl-0">
-                                    <li class="action-item pl-2"><i class="fa fa-heart"></i> <span>306</span></li>
-                                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                                </ul>
-                            </div>
-                            <div class="news-item-descr big-news">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                            <div class="news-item-bottom">
-                                <a href="{{ url($prefix . ($lang == 'ar' ? 'الاخبار/e-tower' : 'news/e-tower')) }}" class="news-link">Read more...</a>
-                                <div class="admin">
-                                    <p>By, Karl Smith</p>
-                                    <img src="{{ asset('front/website/img/b-12.jpg') }}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </li>
+                    @endif
+                </ul>
+            </nav>
         </div>
-        <nav aria-label="..." class="pt-5">
-            <ul class="pagination mt-0">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</section>
-<!-- END SECTION BLOG -->
+    </section>
+    <!-- END SECTION BLOG -->
 @endsection
 
 @push('custom-js-scripts')
-
 @endpush

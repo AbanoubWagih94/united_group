@@ -65,8 +65,8 @@ inner-pages hd-white homepage-9 hp-6 homepage-1
     <section class="headings">
         <div class="text-heading text-center">
             <div class="container">
-                <h1>Exhibitions</h1>
-                <h2><a href="index.html">Home </a> &nbsp;/&nbsp; Exhibitions</h2>
+                <h1>{{ trans('home.exhibitions') }}</h1>
+                <h2><a href="{{url($prefix)}}">{{ trans('home.home') }} </a> &nbsp;/&nbsp; {{ trans('home.exhibitions') }}</h2>
             </div>
         </div>
     </section>
@@ -76,40 +76,42 @@ inner-pages hd-white homepage-9 hp-6 homepage-1
     <section class="featured portfolio bg-white-3 rec-pro">
         <div class="container-fluid">
             <div class="sec-title">
-                <h2>Exhibitions</h2>
-                <p>We provide full service at every step.</p>
+                <h2>{{ trans('home.exhibitions') }}</h2>
+                <p>{{ trans('about_us.choose_us_text') }}</p>
             </div>
             <div class="portfolio col-xl-12">
+                @if(count($exhibitions)>0)
                 <div class="slick-lancers">
+                    @foreach ($exhibitions as $item)
                     <div class="agents-grid" data-aos="fade-up" data-aos-delay="150">
                         <div class="landscapes">
                             <div class="project-single">
                                 <div class="project-inner project-head">
                                     <div class="homes">
                                         <!-- homes img -->
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="homes-img">
-                                            <div class="homes-tag button alt featured">Featured</div>
-                                            <div class="homes-tag button sale rent">For Rent</div>
-                                            <img src="{{ asset('front/website/img/fp-12.jpg') }}" alt="home-1" class="img-responsive">
+                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/' : 'exhibitions/'). $item->{'slug_'.$lang} ) }}" class="homes-img">
+                                            {{-- <div class="homes-tag button alt featured">Featured</div>
+                                            <div class="homes-tag button sale rent">For Rent</div> --}}
+                                            <img src="{{ asset('uploads/'.$item->image) }}" alt="home-1" class="img-responsive">
                                         </a>
                                     </div>
                                     <div class="button-effect">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="btn"><i class="fa fa-link"></i></a>
-                                        <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                        <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/' : 'exhibitions/'). $item->{'slug_'.$lang} ) }}" class="btn"><i class="fa fa-link"></i></a>
+                                        {{-- <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a> --}}
+                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/' : 'exhibitions/'). $item->{'slug_'.$lang} ) }}" class="img-poppu btn"><i class="fa fa-photo"></i></a>
                                     </div>
                                 </div>
                                 <!-- homes content -->
                                 <div class="homes-content">
                                     <!-- homes address -->
-                                    <h3><a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">Real House Luxury Villa</a></h3>
-                                    <p class="homes-address mb-3">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">
-                                            <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
+                                    <h3><a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/' : 'exhibitions/'). $item->{'slug_'.$lang} ) }}">{{$item->{'title_'.$lang} }}</a></h3>
+                                    <p class="homes-address mb-3 three_lines">
+                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/' : 'exhibitions/'). $item->{'slug_'.$lang} ) }}">
+                                          <span>{{$item->{'description_'.$lang} }}</span>
                                         </a>
                                     </p>
                                     <!-- homes List -->
-                                    <ul class="homes-list clearfix">
+                                    {{-- <ul class="homes-list clearfix">
                                         <li class="the-icons">
                                             <i class="flaticon-bed mr-2" aria-hidden="true"></i>
                                             <span>6 Beds</span>
@@ -138,441 +140,18 @@ inner-pages hd-white homepage-9 hp-6 homepage-1
                                                 <i class="flaticon-heart"></i>
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="agents-grid">
-                        <div class="people">
-                            <div class="project-single" data-aos="fade-up" data-aos-delay="250">
-                                <div class="project-inner project-head">
-                                    <div class="homes">
-                                        <!-- homes img -->
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="homes-img">
-                                            <div class="homes-tag button sale rent">For Rent</div>
-                                            <img src="{{ asset('front/website/img/fp-11.jpg') }}" alt="home-1" class="img-responsive">
-                                        </a>
-                                    </div>
-                                    <div class="button-effect">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="btn"><i class="fa fa-link"></i></a>
-                                        <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                        <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                    </div>
-                                </div>
-                                <!-- homes content -->
-                                <div class="homes-content">
-                                    <!-- homes address -->
-                                    <h3><a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">Real House Luxury Villa</a></h3>
-                                    <p class="homes-address mb-3">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">
-                                            <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                        </a>
-                                    </p>
-                                    <!-- homes List -->
-                                    <ul class="homes-list clearfix">
-                                        <li class="the-icons">
-                                            <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                            <span>6 Beds</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                            <span>3 Baths</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-square" aria-hidden="true"></i>
-                                            <span>720 sq ft</span>
-                                        </li>
-                                    </ul>
-                                    <div class="price-properties footer pt-3 pb-0">
-                                        <h3 class="title mt-3">
-                                            <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">$ 120,000</a>
-                                        </h3>
-                                        <div class="compare">
-                                            <a href="#" title="Compare">
-                                                <i class="flaticon-compare"></i>
-                                            </a>
-                                            <a href="#" title="Share">
-                                                <i class="flaticon-share"></i>
-                                            </a>
-                                            <a href="#" title="Favorites">
-                                                <i class="flaticon-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="agents-grid">
-                        <div class="people landscapes no-pb pbp-3">
-                            <div class="project-single" data-aos="fade-up" data-aos-delay="350">
-                                <div class="project-inner project-head">
-                                    <div class="homes">
-                                        <!-- homes img -->
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="homes-img">
-                                            <div class="homes-tag button sale rent">For Rent</div>
-                                            <img src="{{ asset('front/website/img/fp-8.jpg') }}" alt="home-1" class="img-responsive">
-                                        </a>
-                                    </div>
-                                    <div class="button-effect">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="btn"><i class="fa fa-link"></i></a>
-                                        <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                        <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                    </div>
-                                </div>
-                                <!-- homes content -->
-                                <div class="homes-content">
-                                    <!-- homes address -->
-                                    <h3><a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">Real House Luxury Villa</a></h3>
-                                    <p class="homes-address mb-3">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">
-                                            <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                        </a>
-                                    </p>
-                                    <!-- homes List -->
-                                    <ul class="homes-list clearfix">
-                                        <li class="the-icons">
-                                            <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                            <span>6 Beds</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                            <span>3 Baths</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-square" aria-hidden="true"></i>
-                                            <span>720 sq ft</span>
-                                        </li>
-                                    </ul>
-                                    <div class="price-properties footer pt-3 pb-0">
-                                        <h3 class="title mt-3">
-                                            <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">$ 120,000</a>
-                                        </h3>
-                                        <div class="compare">
-                                            <a href="#" title="Compare">
-                                                <i class="flaticon-compare"></i>
-                                            </a>
-                                            <a href="#" title="Share">
-                                                <i class="flaticon-share"></i>
-                                            </a>
-                                            <a href="#" title="Favorites">
-                                                <i class="flaticon-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="agents-grid">
-                        <div class="landscapes">
-                            <div class="project-single no-mb" data-aos="fade-up" data-aos-delay="450">
-                                <div class="project-inner project-head">
-                                    <div class="homes">
-                                        <!-- homes img -->
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="homes-img">
-                                            <div class="homes-tag button alt featured">Featured</div>
-                                            <div class="homes-tag button sale rent">For Rent</div>
-                                            <img src="{{ asset('front/website/img/fp-12.jpg') }}" alt="home-1" class="img-responsive">
-                                        </a>
-                                    </div>
-                                    <div class="button-effect">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="btn"><i class="fa fa-link"></i></a>
-                                        <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                        <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                    </div>
-                                </div>
-                                <!-- homes content -->
-                                <div class="homes-content">
-                                    <!-- homes address -->
-                                    <h3><a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">Real House Luxury Villa</a></h3>
-                                    <p class="homes-address mb-3">
-                                        <a href="properties-details.html">
-                                            <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                        </a>
-                                    </p>
-                                    <!-- homes List -->
-                                    <ul class="homes-list clearfix">
-                                        <li class="the-icons">
-                                            <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                            <span>6 Beds</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                            <span>3 Baths</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-square" aria-hidden="true"></i>
-                                            <span>720 sq ft</span>
-                                        </li>
-                                    </ul>
-                                    <div class="price-properties footer pt-3 pb-0">
-                                        <h3 class="title mt-3">
-                                            <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">$ 120,000</a>
-                                        </h3>
-                                        <div class="compare">
-                                            <a href="#" title="Compare">
-                                                <i class="flaticon-compare"></i>
-                                            </a>
-                                            <a href="#" title="Share">
-                                                <i class="flaticon-share"></i>
-                                            </a>
-                                            <a href="#" title="Favorites">
-                                                <i class="flaticon-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="agents-grid">
-                        <div class="people">
-                            <div class="project-single no-mb" data-aos="fade-up">
-                                <div class="project-inner project-head">
-                                    <div class="homes">
-                                        <!-- homes img -->
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="homes-img">
-                                            <div class="homes-tag button sale rent">For Rent</div>
-                                            <img src="{{ asset('front/website/img/fp-11.jpg') }}" alt="home-1" class="img-responsive">
-                                        </a>
-                                    </div>
-                                    <div class="button-effect">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="btn"><i class="fa fa-link"></i></a>
-                                        <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                        <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                    </div>
-                                </div>
-                                <!-- homes content -->
-                                <div class="homes-content">
-                                    <!-- homes address -->
-                                    <h3><a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">Real House Luxury Villa</a></h3>
-                                    <p class="homes-address mb-3">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">
-                                            <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                        </a>
-                                    </p>
-                                    <!-- homes List -->
-                                    <ul class="homes-list clearfix">
-                                        <li class="the-icons">
-                                            <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                            <span>6 Beds</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                            <span>3 Baths</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-square" aria-hidden="true"></i>
-                                            <span>720 sq ft</span>
-                                        </li>
-                                    </ul>
-                                    <div class="price-properties footer pt-3 pb-0">
-                                        <h3 class="title mt-3">
-                                            <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">$ 120,000</a>
-                                        </h3>
-                                        <div class="compare">
-                                            <a href="#" title="Compare">
-                                                <i class="flaticon-compare"></i>
-                                            </a>
-                                            <a href="#" title="Share">
-                                                <i class="flaticon-share"></i>
-                                            </a>
-                                            <a href="#" title="Favorites">
-                                                <i class="flaticon-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="agents-grid">
-                        <div class="people landscapes no-pb pbp-3">
-                            <div class="project-single no-mb last" data-aos="fade-up">
-                                <div class="project-inner project-head">
-                                    <div class="homes">
-                                        <!-- homes img -->
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="homes-img">
-                                            <div class="homes-tag button sale rent">For Rent</div>
-                                            <img src="{{ asset('front/website/img/fp-8.jpg') }}" alt="home-1" class="img-responsive">
-                                        </a>
-                                    </div>
-                                    <div class="button-effect">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="btn"><i class="fa fa-link"></i></a>
-                                        <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                        <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                    </div>
-                                </div>
-                                <!-- homes content -->
-                                <div class="homes-content">
-                                    <!-- homes address -->
-                                    <h3><a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">Real House Luxury Villa</a></h3>
-                                    <p class="homes-address mb-3">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">
-                                            <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                        </a>
-                                    </p>
-                                    <!-- homes List -->
-                                    <ul class="homes-list clearfix">
-                                        <li class="the-icons">
-                                            <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                            <span>6 Beds</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                            <span>3 Baths</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-square" aria-hidden="true"></i>
-                                            <span>720 sq ft</span>
-                                        </li>
-                                    </ul>
-                                    <div class="price-properties footer pt-3 pb-0">
-                                        <h3 class="title mt-3">
-                                            <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">$ 120,000</a>
-                                        </h3>
-                                        <div class="compare">
-                                            <a href="#" title="Compare">
-                                                <i class="flaticon-compare"></i>
-                                            </a>
-                                            <a href="#" title="Share">
-                                                <i class="flaticon-share"></i>
-                                            </a>
-                                            <a href="#" title="Favorites">
-                                                <i class="flaticon-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="agents-grid">
-                        <div class="landscapes">
-                            <div class="project-single" data-aos="fade-up">
-                                <div class="project-inner project-head">
-                                    <div class="homes">
-                                        <!-- homes img -->
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="homes-img">
-                                            <div class="homes-tag button alt featured">Featured</div>
-                                            <div class="homes-tag button sale rent">For Rent</div>
-                                            <img src="{{ asset('front/website/img/fp-12.jpg') }}" alt="home-1" class="img-responsive">
-                                        </a>
-                                    </div>
-                                    <div class="button-effect">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="btn"><i class="fa fa-link"></i></a>
-                                        <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                        <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                    </div>
-                                </div>
-                                <!-- homes content -->
-                                <div class="homes-content">
-                                    <!-- homes address -->
-                                    <h3><a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">Real House Luxury Villa</a></h3>
-                                    <p class="homes-address mb-3">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">
-                                            <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                        </a>
-                                    </p>
-                                    <!-- homes List -->
-                                    <ul class="homes-list clearfix">
-                                        <li class="the-icons">
-                                            <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                            <span>6 Beds</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                            <span>3 Baths</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-square" aria-hidden="true"></i>
-                                            <span>720 sq ft</span>
-                                        </li>
-                                    </ul>
-                                    <div class="price-properties footer pt-3 pb-0">
-                                        <h3 class="title mt-3">
-                                            <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">$ 120,000</a>
-                                        </h3>
-                                        <div class="compare">
-                                            <a href="#" title="Compare">
-                                                <i class="flaticon-compare"></i>
-                                            </a>
-                                            <a href="#" title="Share">
-                                                <i class="flaticon-share"></i>
-                                            </a>
-                                            <a href="#" title="Favorites">
-                                                <i class="flaticon-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="agents-grid">
-                        <div class="people">
-                            <div class="project-single" data-aos="fade-up">
-                                <div class="project-inner project-head">
-                                    <div class="homes">
-                                        <!-- homes img -->
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="homes-img">
-                                            <div class="homes-tag button sale rent">For Rent</div>
-                                            <img src="{{ asset('front/website/img/fp-11.jpg') }}" alt="home-1" class="img-responsive">
-                                        </a>
-                                    </div>
-                                    <div class="button-effect">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}" class="btn"><i class="fa fa-link"></i></a>
-                                        <a href="https://www.youtube.com/watch?v=14semTlwyUY" class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                        <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                                    </div>
-                                </div>
-                                <!-- homes content -->
-                                <div class="homes-content">
-                                    <!-- homes address -->
-                                    <h3><a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">Real House Luxury Villa</a></h3>
-                                    <p class="homes-address mb-3">
-                                        <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">
-                                            <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                                        </a>
-                                    </p>
-                                    <!-- homes List -->
-                                    <ul class="homes-list clearfix">
-                                        <li class="the-icons">
-                                            <i class="flaticon-bed mr-2" aria-hidden="true"></i>
-                                            <span>6 Beds</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-bathtub mr-2" aria-hidden="true"></i>
-                                            <span>3 Baths</span>
-                                        </li>
-                                        <li class="the-icons">
-                                            <i class="flaticon-square" aria-hidden="true"></i>
-                                            <span>720 sq ft</span>
-                                        </li>
-                                    </ul>
-                                    <div class="price-properties footer pt-3 pb-0">
-                                        <h3 class="title mt-3">
-                                            <a href="{{ url($prefix . ($lang == 'ar' ? 'المعارض/e-tower' : 'exhibitions/e-tower')) }}">$ 120,000</a>
-                                        </h3>
-                                        <div class="compare">
-                                            <a href="#" title="Compare">
-                                                <i class="flaticon-compare"></i>
-                                            </a>
-                                            <a href="#" title="Share">
-                                                <i class="flaticon-share"></i>
-                                            </a>
-                                            <a href="#" title="Favorites">
-                                                <i class="flaticon-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    
+                    @endforeach
                 </div>
+                @else 
+                <p style="text-align: center;"> {{$lang == 'ar'? 'لايوجد معارض' : 'No Exhibtions found'}}</p>
+                @endif
             </div>
         </div>
     </section>

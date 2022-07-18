@@ -2,6 +2,21 @@
 
 $lang = app()->getLocale();
 
+$dir = 'left';
+$dir2 = 'right';
+$prefix = '';
+
+if ($lang == 'en') {
+    $dir = 'left';
+    $dir2 = 'right';
+    $prefix = '/';
+} else {
+    $dir = 'right';
+    $dir2 = 'left';
+    $prefix = 'ar/';
+}
+
+
 $setting = App\Models\E_Tower\Setting::first();
 
 $pageDetail = App\Models\E_Tower\PageDetail::first();
@@ -90,8 +105,8 @@ inner-pages hd-white homepage-9 hp-6 homepage-1
     <section class="headings">
         <div class="text-heading text-center">
             <div class="container">
-                <h1>E-Tower</h1>
-                <h2><a href="index.html">Home </a> &nbsp;/&nbsp; Events &nbsp;/&nbsp; E-Tower</h2>
+                <h1>{{$event->{'title_'.$lang} }}</h1>
+                <h2><a href="{{url($prefix)}}">{{ trans('home.home') }} </a> &nbsp;/&nbsp; <a href="{{ url($prefix . ($lang == 'ar' ? 'الاحداث' : 'events')) }}">{{ trans('home.events') }} </a> &nbsp;/&nbsp; {{$event->{'title_'.$lang} }}</h2>
             </div>
         </div>
     </section>
@@ -101,144 +116,72 @@ inner-pages hd-white homepage-9 hp-6 homepage-1
     <section class="featured portfolio bg-white-3 rec-pro">
         <div class="container-fluid">
             <div class="sec-title">
-                <h2>E-Tower</h2>
-                <p>We provide full service at every step.</p>
+                <h2>{{$event->{'title_'.$lang} }}</h2>
+                <p>{{ trans('about_us.choose_us_text') }}</p>
             </div>
             <div class="full-row pt-0">
                 <div class="container">
+                    @if (count($event->event_images)>0)
+                        
                     <div class="row row-cols-md-3 row-cols-1 g-4">
+                    @for ($i = 0; $i < count($event->event_images); $i+=3)
                         <div class="col">
-                            <div class="row row-cols-1 g-4">
-                                <div class="col">
-                                    <div class="gallery-one">
-                                        <div class="photo-overlay">
-                                            <a href="{{ asset('front/website/img/grid-1.png') }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
-                                                <i class="fas fa-eye" style="color: white"></i>
-                                            </a>
-                                            <img src="{{ asset('front/website/img/grid-1.png') }}" alt="real estate template">
-                                        </div>
-                                        <div class="portfolio-info mt-3">
-                                            
-                                        </div>
+                        <div class="row row-cols-1 g-4">
+                            @if (isset($event->event_images[$i]))
+                            <div class="col">
+                                <div class="gallery-one">
+                                    <div class="photo-overlay">
+                                        <a href="{{ asset('uploads/'.$event->event_images[$i]->image ) }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
+                                            <i class="fas fa-eye" style="color: white"></i>
+                                        </a>
+                                        <img src="{{asset('uploads/'.$event->event_images[$i]->image ) }}" alt="real estate template">
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="gallery-one">
-                                        <div class="photo-overlay">
-                                            <a href="{{ asset('front/website/img/grid-2.png') }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
-                                                <i class="fas fa-eye" style="color: white"></i>
-                                            </a>
-                                            <img src="{{ asset('front/website/img/grid-2.png') }}" alt="real estate template">
-                                        </div>
-                                        <div class="portfolio-info mt-3">
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="gallery-one">
-                                        <div class="photo-overlay">
-                                            <a href="{{ asset('front/website/img/grid-4.png') }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
-                                                <i class="fas fa-eye" style="color: white"></i>
-                                            </a>
-                                            <img src="{{ asset('front/website/img/grid-4.png') }}" alt="real estate template">
-                                        </div>
-                                        <div class="portfolio-info mt-3">
-
-                                        </div>
+                                    <div class="portfolio-info mt-3">
+                                        
                                     </div>
                                 </div>
                             </div>
-                        </div>
-    
-                        <div class="col">
-                            <div class="row row-cols-1 g-4">
-                                <div class="col">
-                                    <div class="gallery-one">
-                                        <div class="photo-overlay">
-                                            <a href="{{ asset('front/website/img/grid-5.png') }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
-                                                <i class="fas fa-eye" style="color: white"></i>
-                                            </a>
-                                            <img src="{{ asset('front/website/img/grid-5.png') }}" alt="real estate template">
-                                        </div>
-                                        <div class="portfolio-info mt-3">
-
-                                        </div>
+                            @endif
+                            @if (isset($event->event_images[$i+1]))
+                            <div class="col">
+                                <div class="gallery-one">
+                                    <div class="photo-overlay">
+                                        <a href="{{ asset('uploads/'.$event->event_images[$i+1]->image ) }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
+                                            <i class="fas fa-eye" style="color: white"></i>
+                                        </a>
+                                        <img src="{{ asset('uploads/'.$event->event_images[$i+1]->image )}}" alt="real estate template">
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="gallery-one">
-                                        <div class="photo-overlay">
-                                            <a href="{{ asset('front/website/img/grid-4.png') }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
-                                                <i class="fas fa-eye" style="color: white"></i>
-                                            </a>
-                                            <img src="{{ asset('front/website/img/grid-4.png') }}" alt="real estate template">
-                                        </div>
-                                        <div class="portfolio-info mt-3">
+                                    <div class="portfolio-info mt-3">
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="gallery-one">
-                                        <div class="photo-overlay">
-                                            <a href="{{ asset('front/website/img/grid-6.png') }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
-                                                <i class="fas fa-eye" style="color: white"></i>
-                                            </a>
-                                            <img src="{{ asset('front/website/img/grid-6.png') }}" alt="real estate template">
-                                        </div>
-                                        <div class="portfolio-info mt-3">
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-    
-                        <div class="col">
-                            <div class="row row-cols-1 g-4">
-                                <div class="col">
-                                    <div class="gallery-one">
-                                        <div class="photo-overlay">
-                                            <a href="{{ asset('front/website/img/grid-4.png') }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
-                                                <i class="fas fa-eye" style="color: white"></i>
-                                            </a>
-                                            <img src="{{ asset('front/website/img/grid-4.png') }}" alt="real estate template">
-                                        </div>
-                                        <div class="portfolio-info mt-3">
-
-                                        </div>
+                            @endif
+                            
+                            @if (isset($event->event_images[$i+2]))
+                            <div class="col">
+                                <div class="gallery-one">
+                                    <div class="photo-overlay">
+                                        <a href="{{ asset('uploads/'.$event->event_images[$i+2]->image ) }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
+                                            <i class="fas fa-eye" style="color: white"></i>
+                                        </a>
+                                        <img src="{{ asset('uploads/'.$event->event_images[$i+2]->image )}}" alt="real estate template">
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="gallery-one">
-                                        <div class="photo-overlay">
-                                            <a href="{{ asset('front/website/img/grid-7.png') }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
-                                                <i class="fas fa-eye" style="color: white"></i>
-                                            </a>
-                                            <img src="{{ asset('front/website/img/grid-7.png') }}" alt="real estate template">
-                                        </div>
-                                        <div class="portfolio-info mt-3">
+                                    <div class="portfolio-info mt-3">
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="gallery-one">
-                                        <div class="photo-overlay">
-                                            <a href="{{ asset('front/website/img/grid-1.png') }}" class="photo-view transation xy-center" data-fancybox="gallery" data-caption="Caption for image">
-                                                <i class="fas fa-eye" style="color: white"></i>
-                                            </a>
-                                            <img src="{{ asset('front/website/img/grid-1.png') }}" alt="real estate template">
-                                        </div>
-                                        <div class="portfolio-info mt-3">
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
-                    </div>
+                        </div>     
+                    @endfor
+                </div>
+                   
+                    @else
+                                   
+                    <p style="text-align: center;">{{$lang == 'ar'? 'لايوجد صور لهذا الحدث': 'No Iamges found for this event'}}</p>
+                    @endif
                 </div>
             </div>
         </div>
